@@ -13,23 +13,23 @@ function valid(params, reqs) {
 export default {
   sqrt(x,y) {
     if (Math.sqrt(x) === y) {
-      return "Math.sqrt(" + x + ")";
+      return [`Math.sqrt(${x})`, "HI!"];
     }
+    return [];
   },
-  //js_sqrt.config = { x: [ "string" ], y: [ "string" ] };
 
   trim(x,y) {
     if (x.trim() === y) {
-      return "trim()";
+      return ["trim()"];
     }
+    return [];
   },
-  //js_trim.config = { x: [ "string" ], y: [ "string" ] };
 
   stringLength(x,y) {
     if (x.length === y) {
-      return "length";
+      return [`${x}.length`];
     }
+    return []
   }
 };
-//js_string_length.config = { x: [ "string" ], y: [ "number" ] };
 

@@ -29,28 +29,15 @@ function calc(x_raw,y_raw) {
       var [test, rqmts] = action.tests[key];
 
       if(typeof(x) === rqmts[0] && typeof(y) === rqmts[1]) {
-        var result = test(x,y);
-        if(result !== undefined) {
-          matches.push(result);
-        }
+        matches = matches.concat({language: key, results: test(x,y)});
       }
     });
   });
 
-
-  //catalog.js.forEach(function(test) {
-  //  if(test.x.indexOf(tx) != -1) {
-  //    var result = test.f(x,y);
-  //    if(result !== undefined) {
-  //      matches.push(result);
-  //    }
-  //  }
-  //});
-
   return matches;
 }
 
-
+Vue.config.debug = true;
 var demo = new Vue({
   el: '#demo',
   data: {
