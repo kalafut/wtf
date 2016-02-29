@@ -1,5 +1,6 @@
 import js from './checkers/js.js';
 import go from './checkers/go.js';
+import py from './checkers/py.js';
 
 var catalog = [
   {
@@ -20,7 +21,9 @@ var catalog = [
   {
     desc: "String length",
     tests: {
-      js: [ js.stringLength, [ "string", "number" ] ]
+      go: [ go.stringLength, [ "string", "number" ] ],
+      js: [ js.stringLength, [ "string", "number" ] ],
+      py: [ py.stringLength, [ "string", "number" ] ],
     }
   },
 

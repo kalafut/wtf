@@ -27,7 +27,7 @@ export default {
 
   stringLength(x,y) {
     if (x.length === y) {
-      return [`${x}.length`];
+      return [`"${x}".length`];
     }
     return []
   }
