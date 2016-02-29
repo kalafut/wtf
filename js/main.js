@@ -1,10 +1,10 @@
-$(".xy").on("input", calc);
+import Vue from 'vue';
+import catalog from './catalog';
 
-function calc() {
-  $("#output").text("");
+//var Vue = require('vue');
 
-  var x_raw = $("#x").val();
-  var y_raw = $("#y").val();
+function calc(x_raw,y_raw) {
+  var x,y;
 
   try {
     x = eval(x_raw);
@@ -21,36 +21,42 @@ function calc() {
     return;
   }
 
-  catalog.js.forEach(function(test) {
-    if(test.x.indexOf(tx) != -1) {
-      test.f(x,y);
-    }
+  var matches = [];
+
+  catalog.forEach(function(action) {
+    var keys = Object.keys(action.tests);
+    keys.forEach(function(key) {
+      var test = action.tests[key];
+      var result = test(x,y);
+      if(result !== undefined) {
+        matches.push(result);
+      }
+    });
   });
+
+
+  //catalog.js.forEach(function(test) {
+  //  if(test.x.indexOf(tx) != -1) {
+  //    var result = test.f(x,y);
+  //    if(result !== undefined) {
+  //      matches.push(result);
+  //    }
+  //  }
+  //});
+
+  return matches;
 }
 
-function js_sqrt(x,y) {
-  if (Math.sqrt(x) === y) {
-    $("#output").append("Math.sqrt()");
+
+var demo = new Vue({
+  el: '#demo',
+  data: {
+    x: '9',
+    y: '3'
+  },
+  computed: {
+    matches: function() {
+      return calc(this.x, this.y);
+    }
   }
-}
-
-function js_trim(x,y) {
-  if (x.trim() === y) {
-    $("#output").append("trim()");
-  }
-}
-
-function js_string_length(x,y) {
-  if (x.length === y) {
-    $("#output").append("length");
-  }
-}
-
-var catalog = {
-  js: [
-    { f: js_trim, x: [ "string" ], y: [ "string" ] },
-    { f: js_sqrt, x: [ "number" ], y: [ "number" ] },
-    { f: js_string_length, x: [ "string" ], y: [ "number" ] },
-  ]
-};
-
+});
