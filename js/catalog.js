@@ -5,20 +5,20 @@ var catalog = [
   {
     desc: "Calculate the square root",
     tests: {
-      js: js.sqrt,
+      js: [ js.sqrt, ["number","number"] ]
       //go: lib.go_sqrt
     }
   },
   {
     desc: "Trim leading and trailing whitespace",
     tests: {
-      js: js.trim,
+      js: [ js.trim, ["string", "string"] ]
     }
   },
   {
     desc: "String length",
     tests: {
-      //js: js.stringLength,
+      js: [ js.stringLength, [ "string", "number" ] ]
     }
   },
 

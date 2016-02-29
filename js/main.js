@@ -23,13 +23,16 @@ function calc(x_raw,y_raw) {
 
   var matches = [];
 
-  catalog.forEach(function(action) {
+  catalog.forEach(action => {
     var keys = Object.keys(action.tests);
-    keys.forEach(function(key) {
-      var test = action.tests[key];
-      var result = test(x,y);
-      if(result !== undefined) {
-        matches.push(result);
+    keys.forEach(key => {
+      var [test, rqmts] = action.tests[key];
+
+      if(typeof(x) === rqmts[0] && typeof(y) === rqmts[1]) {
+        var result = test(x,y);
+        if(result !== undefined) {
+          matches.push(result);
+        }
       }
     });
   });
