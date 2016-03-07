@@ -26,6 +26,14 @@ var catalog = [
       py: [ py.stringLength, [ "string", "number" ] ],
     }
   },
+  //{
+  //  desc: "String prefix",
+  //  tests: {
+  //    go: [ go.stringPrefix, [ "string", "boolean" ] ],
+  //    js: [ js.stringPrefix, [ "string", "boolean" ] ],
+  //    py: [ py.stringPrefix, [ "string", "boolean" ] ],
+  //  }
+  //},
 
 ];
 

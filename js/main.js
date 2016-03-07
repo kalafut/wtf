@@ -3,7 +3,7 @@ import catalog from './catalog';
 
 //var Vue = require('vue');
 
-function calc(x_raw,y_raw) {
+function calc(x_raw,y_raw, selectedLangs) {
   var x,y;
 
   try {
@@ -24,12 +24,14 @@ function calc(x_raw,y_raw) {
   var matches = [];
 
   catalog.forEach(action => {
-    var keys = Object.keys(action.tests);
-    keys.forEach(key => {
-      var [test, rqmts] = action.tests[key];
+    var langs = Object.keys(action.tests);
+    langs.forEach(lang => {
+      if(selectedLangs.indexOf(lang) != -1) {
+          var [test, rqmts] = action.tests[lang];
 
-      if(typeof(x) === rqmts[0] && typeof(y) === rqmts[1]) {
-        matches = matches.concat({language: key, results: test(x,y)});
+          if(typeof(x) === rqmts[0] && typeof(y) === rqmts[1]) {
+            matches = matches.concat({language: lang, results: test(x,y)});
+          }
       }
     });
   });
@@ -42,11 +44,12 @@ var demo = new Vue({
   el: '#demo',
   data: {
     x: '9',
-    y: '3'
+    y: '3',
+    languages: []
   },
   computed: {
     matches: function() {
-      return calc(this.x, this.y);
+      return calc(this.x, this.y, this.languages);
     }
   }
 });
